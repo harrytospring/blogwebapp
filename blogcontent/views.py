@@ -6,7 +6,16 @@ from django.template import RequestContext,loader
 def index(request):
 	return HttpResponse("hello,this is the first site")
 def blog(request,head):
-	return HttpResponse("THIS BLOG FROM %s" % head)
+	blogheadlist = blog_content.objects.values("blog_head","blog_text")
+	template = loader.get_template('blogcontent/blogcontent.html')
+	b=[]
+	for i in blogheadlist:
+		b.append(i)
+	context=RequestContext(request,{
+		'i':b[int(head)],
+		'head':int(head),
+		})
+	return HttpResponse(template.render(context))
 def bloglist(request):
 	bloglist = blog_content.objects.values("blog_head")
 	blog_num = blog_content.objects.count()
