@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import blog_content
-class blog_contentAdmin(admin.ModelAdmin):
-	fields = ['blog_head','blog_text']
-admin.site.register(blog_content,blog_contentAdmin)
+from .models import timeNode
+class timeNodeAdmin(admin.ModelAdmin):
+	fields = ['type','time','todoList','doneList']
+admin.site.register(timeNode,timeNodeAdmin)
 # Register your models here.
